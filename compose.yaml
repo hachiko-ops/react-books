@@ -1,0 +1,21 @@
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    volumes:
+      - ./backend:/backend
+      - /backend/node_modules
+    ports:
+      - "5174:5174"
+    environment:
+      MONGO_URI: mongodb://mongodb:27017/react_books
+    depends_on:
+      - mongodb  
+  mongodb:
+    image: mongo:8
+    volumes:
+      - mongodb_data:/data/db    
+
+volumes:
+  mongodb_data:      
