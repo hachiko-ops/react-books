@@ -5,9 +5,13 @@ async function importBooks(){
     console.log("Start import book");
 
     const books = await googleBookService.getBooks(
-        'subject:programming'
+        'subject:fantasy'
     );
 
+    if( books.length > 0 ) {
+        // Save book in Mongo DB
+        console.log(books);
+    }
     console.log("Import completed");
 }
 
