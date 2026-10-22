@@ -1,10 +1,14 @@
-import { API_KEY } from '../config.js';
+import { API_KEY } from '../config/settings.js';
 import type { GoogleBook,GoogleBooksResponse } from "../interfaces/googleBooks.js";
 import type { Book } from "../interfaces/main.js";
 
 export class GoogleBookService {
 
     async getBooks(search:string): Promise<Book[]>{
+        if (!API_KEY) {
+            throw new Error("Google Books API key is not defined");
+        }
+
         const url = new URL(
             "https://www.googleapis.com/books/v1/volumes"
         );
@@ -28,12 +32,12 @@ export class GoogleBookService {
             console.log(data);
             if( data.items && data.items.length > 0 ) {
                 const books: Book[] = data.items.map( (item: GoogleBook) => ({
-                    id: item.id,
+                    service_id: item.id,
                     title: item.volumeInfo.title,
                     subtitle: item.volumeInfo.subtitle,
                     authors: item.volumeInfo.authors,
                     description: item.volumeInfo.description,
-                    language: item.volumeInfo.description,
+                    language: item.volumeInfo.language,
                     imageLinks: item.volumeInfo.imageLinks,
                     listPrice: item.saleInfo?.listPrice
                 }));

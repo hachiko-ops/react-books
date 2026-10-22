@@ -1,5 +1,5 @@
 export interface Book {
-    id: string;
+    service_id: string;
     title: string;
     subtitle?: string;
     authors?: string[];
