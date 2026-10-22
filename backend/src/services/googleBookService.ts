@@ -4,6 +4,12 @@ import type { Book } from "../interfaces/main.js";
 
 export class GoogleBookService {
 
+    private filterParams: string[] = [];
+
+    addCategoryFilter( filter: string ) {
+        this.filterParams.push("subject",filter);
+    }
+
     async getBooks(search:string): Promise<Book[]>{
         if (!API_KEY) {
             throw new Error("Google Books API key is not defined");

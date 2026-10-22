@@ -1,15 +1,14 @@
 import { booksCollection, connectMongo, disconnectMongo } from '../config/mongo.js';
-import { GoogleBookService } from '../services/googleBookService.js';
+import { getBookService } from '../services/bookService.js';
 
-const googleBookService = new GoogleBookService();
+const BookService = getBookService('openLibrary');
 async function importBooks(){
     try {
         await connectMongo();
         console.log("Start import book");
 
-        const books = await googleBookService.getBooks(
-            'subject:fantasy'
-        );
+        BookService.addCategoryFilter('comedy');
+        const books = await BookService.getBooks();
 
         if( books.length > 0 ) {
             // Save book in Mongo DB
