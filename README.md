@@ -150,7 +150,7 @@ Il modello condiviso `Book` contiene attualmente:
 - `languages`: lingue, se disponibili
 - `imageLinks.thumbnail`: URL della copertina, se disponibile
 
-MongoDB genera inoltre il proprio campo `_id) per i documenti salvati.
+MongoDB genera inoltre il proprio campo `_id` per i documenti salvati.
 
 ## Prossimi passi
 
