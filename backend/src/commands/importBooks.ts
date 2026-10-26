@@ -1,7 +1,9 @@
 import { booksCollection, connectMongo, disconnectMongo } from '../config/mongo.js';
 import { getBookService } from '../services/bookService.js';
+import { randomUUID } from "crypto";
 
-const BookService = getBookService('openLibrary');
+const provider = 'openLibrary';
+const BookService = getBookService(provider);
 async function importBooks(){
     try {
         await connectMongo();
@@ -12,16 +14,25 @@ async function importBooks(){
 
         console.log(books);
         if( books.length > 0 ) {
-            // Save book in Mongo DB
-            await booksCollection.bulkWrite(
-                books.map(book => ({
-                    updateOne: {
-                    filter: { service_id: book.service_id },
-                    update: { $set: book },
-                    upsert: true
-                    }
-                }))
+
+            await Promise.all(
+                books.map( book => 
+                    booksCollection.updateOne(
+                        {
+                            provider: provider,
+                            service_id: book.service_id
+                        },
+                        {
+                            $setOnInsert: {
+                                _id: randomUUID(),
+                                ...book
+                            }
+                        },
+                        { upsert: true }                        
+                    )
+                )
             );
+
         }
 
         console.log("Import completed");
