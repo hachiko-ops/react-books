@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
+    "start": "npx tsx index.ts",
     "import-books": "tsx src/commands/importBooks.ts"
   },
   "keywords": [],
