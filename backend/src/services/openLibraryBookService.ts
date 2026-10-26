@@ -28,11 +28,14 @@ export class OpenLibraryBookService implements BookService {
                 const data:OpenLibraryResponse = await response.json();
 
                 if( data.docs ) {
+
                     const detailsPromises = data.docs.map( async (item: OpenLibraryBook) =>  {
-                        console.log(this.detailsUrl+item.key+'.json');
-                        const response = await fetch( this.detailsUrl+item.key+'.json');
+                        const rawKey = item.key.startsWith("/works") ? item.key.replace("/works/","") : item.key;
+                        console.log(this.detailsUrl+rawKey+'.json');
+                        const response = await fetch( this.detailsUrl+rawKey+'.json');
                         if( ! response.ok ) {
-                            throw new Error(`Error ${item.key}: ${response.status}`);
+                            console.log(`Error ${item.key}: ${response.status}`);
+                            return {};
                         }
 
                         const details: OpenLibraryDetailsBook = await response.json();

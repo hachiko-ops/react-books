@@ -10,9 +10,18 @@ async function importBooks(){
         BookService.addCategoryFilter('comedy');
         const books = await BookService.getBooks();
 
+        console.log(books);
         if( books.length > 0 ) {
             // Save book in Mongo DB
-            await booksCollection.insertMany(books);
+            await booksCollection.bulkWrite(
+                books.map(book => ({
+                    updateOne: {
+                    filter: { service_id: book.service_id },
+                    update: { $set: book },
+                    upsert: true
+                    }
+                }))
+            );
         }
 
         console.log("Import completed");

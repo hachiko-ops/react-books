@@ -4,10 +4,10 @@ import type { Book } from "../interfaces/main.js";
 
 export class GoogleBookService {
 
-    private filterParams: string[] = [];
+    private filterParams: Record<string, string> = {};
 
     addCategoryFilter( filter: string ) {
-        this.filterParams.push("subject",filter);
+        this.filterParams["subject"] = filter;
     }
 
     async getBooks(search:string): Promise<Book[]>{
