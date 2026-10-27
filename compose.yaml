@@ -13,7 +13,19 @@ services:
     environment:
       MONGO_URI: mongodb://${MONGO_ROOT_USERNAME}:${MONGO_ROOT_PASSWORD}@mongodb:27017/react_books?authSource=admin
     depends_on:
-      - mongodb  
+      - mongodb   
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    volumes: 
+      - ./frontend:/frontend
+      - /frontend/node_modules
+    ports:
+      - "5173:5173"
+    command: npm run dev -- --host 0.0.0.0
+
   mongodb:
     image: mongo:7.0
     environment:
@@ -23,19 +35,7 @@ services:
     ports:
       - "27017:27017"    
     volumes:
-      - mongodb_data:/data/db    
-
-  frontend:
-    build:
-      context: ./frontend
-      dockerfile: Dockerfile
-    volumes: 
-      - ./frontend:/frontend
-      - /frontend/node_modules
-    ports: 
-      - "8080:80"
-
-
+      - mongodb_data:/data/db       
 
 volumes:
   mongodb_data:      
