@@ -1,9 +1,6 @@
 import { OpenLibraryBookService } from "./openLibraryBookService.js";
 import { GoogleBookService} from "./googleBookService.js";
-import type { Book } from "../interfaces/main.js";
-
-
-type BookProvider = "openLibrary" | "google";
+import type { Book, BookProvider } from "../interfaces/main.js";
 
 export interface BookService {
     getBooks(search?: string): Promise<Book[]>;
