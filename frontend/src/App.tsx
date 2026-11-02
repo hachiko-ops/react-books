@@ -1,6 +1,7 @@
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import SearchForm from './SearchForm.tsx';
+import BookList from './BookList.tsx';
 
 function App() {
     return (
@@ -13,6 +14,9 @@ function App() {
                     <SearchForm />
                 </nav>
             </header>
+            <main className="container mt-4">
+                <BookList />
+            </main>
         </div>
     );
 }
