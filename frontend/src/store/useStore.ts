@@ -22,10 +22,17 @@ interface StoreState {
 
 
 
-const useStore = create<StoreState>((set) => ({
+const useStore = create<StoreState>((set, get) => ({
     searchTitle: '',
     books: [],
-    setSearchTitle: (title:string) => set({searchTitle: title}),
+    setSearchTitle: async (title:string) => {
+        set({searchTitle: title});
+
+        if( title.trim() === '') {
+            get().searchBooks('');; // Clear the books list if the search title is empty
+            return;
+        }
+    },
     searchBooks: async (title:string) => {
         // Implement the logic to search books based on the title
         // This could involve making an API call or filtering a list of books

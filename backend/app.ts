@@ -11,8 +11,6 @@ app.use(cors({
   allowedHeaders: ['Content-Type'], // Allow only specific headers
 }));
 
-console.log("sono qui?");
-
 app.use(express.json());
 
 app.use('/books', booksRoutes);
