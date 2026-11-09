@@ -1,6 +1,6 @@
 import type { OpenLibraryBook,OpenLibraryResponse, OpenLibraryDetailsBook } from "../interfaces/openLibraryBooks.js";
 import type { Book } from "../interfaces/main.js";
-import { BookService } from "./bookService.js";
+import { BookService } from "./book.provider.js";
 
 const API_URL = "https://openlibrary.org/";
 

@@ -1,5 +1,5 @@
-import { OpenLibraryBookService } from "./openLibraryBookService.js";
-import { GoogleBookService} from "./googleBookService.js";
+import { OpenLibraryBookService } from "./openLibraryBook.provider.js";
+import { GoogleBookService} from "./googleBook.provider.js";
 import type { Book, BookProvider } from "../interfaces/main.js";
 
 export interface BookService {

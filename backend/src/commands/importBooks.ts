@@ -1,5 +1,5 @@
 import { booksCollection, connectMongo, disconnectMongo } from '../config/mongo.js';
-import { getBookService } from '../services/bookService.js';
+import { getBookService } from '../providers/book.provider.js';
 import { randomUUID } from "crypto";
 
 const provider = 'openLibrary';

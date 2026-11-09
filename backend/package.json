@@ -2,9 +2,9 @@
   "name": "backend",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
-    "start": "npx tsx index.ts",
+    "start": "npx tsx server.ts",
     "import-books": "tsx src/commands/importBooks.ts"
   },
   "keywords": [],
