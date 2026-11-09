@@ -26,6 +26,8 @@ export async function searchBooks(filters: Filters): Promise<BookResponse[]> {
             filter['languages'] = { $in: filters.languages };
         }
 
+        console.log("Searching books with filters:", filter);
+
         const books = await booksCollection.find(filter).toArray();
         // Exclude internal fields and rename _id to uuid.
         return books.map(({ _id, provider, service_id, ...book }) => ({
