@@ -11,16 +11,16 @@ export async function searchBooks(filters: Filters): Promise<BookResponse[]> {
         const filter: Filter<Book> = {};
 
         if( filters.title ) {
-            filter['title'] = { $regex: escapeRegExp(filters.title.trim()), $options: 'i' };
+            filter['title'] = { $regex: escapeRegExp(filters.title), $options: 'i' };
         }
         if( filters.subtitle ) {
-            filter['subtitle'] = { $regex: escapeRegExp(filters.subtitle.trim()), $options: 'i' };
+            filter['subtitle'] = { $regex: escapeRegExp(filters.subtitle), $options: 'i' };
         }
         if( filters.authors && filters.authors.length > 0 ) {
             filter['authors'] = { $in: filters.authors };
         }
         if( filters.description ) {
-            filter['description'] = { $regex: escapeRegExp(filters.description.trim()), $options: 'i' };
+            filter['description'] = { $regex: escapeRegExp(filters.description), $options: 'i' };
         }
         if( filters.languages && filters.languages.length > 0 ) {
             filter['languages'] = { $in: filters.languages };
