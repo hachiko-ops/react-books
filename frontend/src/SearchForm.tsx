@@ -15,7 +15,7 @@ function SearchForm() {
             <input
                 className="form-control me-2"
                 type="search"
-                placeholder="Search"
+                placeholder="Search books by title"
                 aria-label="Search"
                 value={searchTitle}
                 onChange={(e: ChangeEvent<HTMLInputElement>) => setSearchTitle(e.target.value)}

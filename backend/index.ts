@@ -1,9 +1,16 @@
 import express from "express";
+import cors from "cors";
 import { booksCollection, connectMongo } from './src/config/mongo.js';
-import type {Book} from './src/interfaces/main.js';
 
 const app = express();
 const PORT = 5174;
+
+app.use(cors({
+  origin: 'http://localhost:5173', // Allow requests from this origin
+  methods: ['GET', 'POST'], // Allow only GET and POST requests
+  allowedHeaders: ['Content-Type'], // Allow only specific headers
+}));
+app.use(express.json());
 
 async function startServer() {
   try {
@@ -23,7 +30,10 @@ async function startServer() {
         })));
 
       } catch (error) {
-        return res.status(500);
+        console.error("Error retrieving books:", error);
+        return res.status(500).json({
+          error: "Internal server error"
+        });
       }
     });
 

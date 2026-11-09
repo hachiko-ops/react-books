@@ -2,8 +2,17 @@ import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import SearchForm from './SearchForm.tsx';
 import BookList from './BookList.tsx';
+import useStore from './store/useStore.js';
+import { useEffect } from 'react';
 
 function App() {
+    const searchBooks = useStore(state => state.searchBooks);
+
+    useEffect(() => {
+        // Perform an initial search with an empty title to fetch all books
+        searchBooks('');
+    }, [searchBooks]);
+
     return (
         <div className="App">
             <header className="App-header">

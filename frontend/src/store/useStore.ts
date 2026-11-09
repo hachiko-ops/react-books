@@ -1,6 +1,6 @@
 import {create} from 'zustand';
 
-const API_URL = "http://localhost:3000";
+const API_URL = "http://localhost:5174";
 
 export interface Book {  
     uuid: string; 
